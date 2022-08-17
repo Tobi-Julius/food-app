@@ -1,10 +1,11 @@
-import { StyleSheet, View, FlatList, TouchableOpacity } from "react-native";
 import { Text } from "../component/common";
 import React, { useState } from "react";
-import { COLORS, SIZES } from "../constants/Theme";
-
+import { StyleSheet, View, FlatList, TouchableOpacity } from "react-native";
+import { COLORS, IMAGES, SIZES } from "../constants";
 export const Home = () => {
   const [number, setNumber] = useState("");
+  const [categories, setCategories] = useState(category);
+  const [selectedCategory, setSelectedCategory] = useState("all");
   const [restaurant, setRestaurant] = useState(restaurantData);
 
   const restaurantData = [
@@ -12,61 +13,57 @@ export const Home = () => {
 
     {
       id: 1,
-      name: "",
-      categories: [1, 7],
-      image: "",
-      duration: "",
-      priceRting: "",
+      name: "beans",
+      categories: [1, 2],
+      image: IMAGES.beans1,
+      duration: "45mins-1hour",
+      priceRating: "affordable",
+      serviceWorker: "infinity kitchen",
       courier: {
-        name: "",
-        location: "",
+        name: "Julie",
+        location: "lagos",
       },
       menu: [
         {
           id: 1,
-          name: "",
-          price: "",
-          image: "",
-          description: "",
-          calories: "",
-          price: "",
+          name: "norwegian beans",
+          price: "500",
+          image: IMAGES.beans2,
+          description: "food gives us energy",
+          calories: 200,
         },
         {
           id: 2,
-          name: "",
-          price: "",
-          image: "",
-          description: "",
-          calories: "",
-          price: "",
+          name: "agoyin beans",
+          price: "300",
+          image: IMAGES.beans1,
+          description: "food gives us energy",
+          calories: 190,
         },
         {
           id: 3,
-          name: "",
-          price: "",
-          image: "",
-          description: "",
-          calories: "",
-          price: "",
+          name: "beans soup",
+          price: 400,
+          image: IMAGES.beans2,
+          description: "food gives us energy",
+          calories: 180,
         },
-        {
-          id: 4,
-          name: "",
-          price: "",
-          image: "",
-          description: "",
-          calories: "",
-          price: "",
-        },
-        {
-          id: 5,
-          name: "",
-          price: "",
-          image: "",
-          description: "",
-          calories: "",
-          price: "",
-        },
+        // {
+        //   id: 4,
+        //   name: "",
+        //   price: "",
+        //   image: "",
+        //   description: "",
+        //   calories: "",
+        // },
+        // {
+        //   id: 5,
+        //   name: "",
+        //   price: "",
+        //   image: "",
+        //   description: "",
+        //   calories: "",
+        // },
       ],
     },
 
@@ -74,61 +71,57 @@ export const Home = () => {
 
     {
       id: 2,
-      name: "",
-      categories: [2, 4],
-      image: "",
-      duration: "",
-      priceRting: "",
+      name: "bread",
+      categories: [2, 1],
+      image: IMAGES.bread1,
+      duration: "30mins-35mins",
+      priceRating: "fair price",
+      serviceWorker: "infinity kitchen",
       courier: {
-        name: "",
-        location: "",
+        name: "amy",
+        location: "ilorin",
       },
       menu: [
         {
           id: 5,
-          name: "",
-          price: "",
-          image: "",
-          description: "",
-          calories: "",
-          price: "",
+          name: "buttered bread",
+          price: "750",
+          image: IMAGES.bread2,
+          description: "food gives us energy",
+          calories: 70,
         },
         {
           id: 6,
-          name: "",
-          price: "",
-          image: "",
-          description: "",
-          calories: "",
-          price: "",
+          name: "wheat bread",
+          price: 600,
+          image: IMAGES.bread3,
+          description: "food gives us energy",
+          calories: 85,
         },
         {
           id: 7,
-          name: "",
-          price: "",
-          image: "",
-          description: "",
-          calories: "",
-          price: "",
+          name: "chocolate bread",
+          price: 1100,
+          image: IMAGES.bread4,
+          description: "food gives us energy",
+          calories: 100,
         },
         {
           id: 8,
-          name: "",
-          price: "",
-          image: "",
-          description: "",
-          calories: "",
-          price: "",
+          name: "coconut bread",
+          price: "899",
+          image: IMAGES.bread1,
+          description: "food gives us energy",
+          calories: 103,
         },
-        {
-          id: 9,
-          name: "",
-          price: "",
-          image: "",
-          description: "",
-          calories: "",
-          price: "",
-        },
+        // {
+        //   id: 9,
+        //   name: "",
+        //   price: "",
+        //   image: "",
+        //   description: "",
+        //   calories: "",
+        // },
       ],
     },
 
@@ -136,61 +129,58 @@ export const Home = () => {
 
     {
       id: 3,
-      name: "",
-      categories: [5, 6],
-      image: "",
-      duration: "",
-      priceRting: "",
+      name: "chicken",
+      categories: [3, 4],
+      image: IMAGES.chicken1,
+      duration: "20mins-30min",
+      priceRating: "expensive",
+      serviceWorker: "infinity kitchen",
       courier: {
-        name: "",
-        location: "",
+        name: "remy",
+        location: "Takie",
       },
       menu: [
         {
           id: 10,
-          name: "",
-          price: "",
-          image: "",
-          description: "",
-          calories: "",
-          price: "",
+          name: "garnished chicken",
+          price: "7000",
+          image: IMAGES.chicken2,
+          description: "food gives us energy",
+          calories: 55,
         },
         {
           id: 11,
-          name: "",
-          price: "",
-          image: "",
-          description: "",
-          calories: "",
-          price: "",
+          name: "roasted chicken",
+          price: "6500",
+          image: IMAGES.chicken3,
+          description: "food gives us energy",
+          calories: 52,
         },
         {
           id: 12,
-          name: "",
-          price: "",
-          image: "",
-          description: "",
-          calories: "",
-          price: "",
+          name: "midly done chicken",
+          price: 6000,
+          image: IMAGES.chicken4,
+          description: "food gives us energy",
+          calories: 35,
         },
         {
           id: 13,
-          name: "",
-          price: "",
-          image: "",
-          description: "",
-          calories: "",
-          price: "",
+          name: "chicken lap",
+          price: 2500,
+          image: IMAGES.chicken1,
+          description: "food gives us energy",
+          calories: 25,
         },
-        {
-          id: 14,
-          name: "",
-          price: "",
-          image: "",
-          description: "",
-          calories: "",
-          price: "",
-        },
+        // {
+        //   id: 14,
+        //   name: "",
+        //   price: "",
+        //   image: "",
+        //   description: "",
+        //   calories: "",
+        //   price: "",
+        // },
       ],
     },
 
@@ -198,61 +188,58 @@ export const Home = () => {
 
     {
       id: 4,
-      name: "",
-      categories: [1, 3],
-      image: "",
-      duration: "",
-      priceRting: "",
+      name: "fish",
+      serviceWorker: "infinity kitchen",
+      categories: [4, 8],
+      image: IMAGES.fish1,
+      duration: "15-25mins",
+      priceRating: "fair price",
       courier: {
-        name: "",
-        location: "",
+        name: "jacob",
+        location: "stadium area",
       },
       menu: [
         {
           id: 15,
-          name: "",
-          price: "",
-          image: "",
-          description: "",
-          calories: "",
-          price: "",
+          name: "ganished fish",
+          price: 2499,
+          image: IMAGES.fish2,
+          description: "food gives us energy",
+          calories: 49,
         },
         {
           id: 16,
-          name: "",
-          price: "",
-          image: "",
-          description: "",
-          calories: "",
-          price: "",
+          name: "fried fish",
+          price: 2199,
+          image: IMAGES.fish3,
+          description: "food gives us energy",
+          calories: 69,
         },
         {
           id: 17,
-          name: "",
-          price: "",
-          image: "",
-          description: "",
-          calories: "",
-          price: "",
+          name: "smoked fish",
+          price: "1599",
+          image: IMAGES.fish4,
+          description: "food gives us energy",
+          calories: 40,
         },
         {
           id: 18,
-          name: "",
-          price: "",
-          image: "",
-          description: "",
-          calories: "",
-          price: "",
+          name: "midly done fish",
+          price: 1099,
+          image: IMAGES.fish1,
+          description: "food gives us energy",
+          calories: 55,
         },
-        {
-          id: 19,
-          name: "",
-          price: "",
-          image: "",
-          description: "",
-          calories: "",
-          price: "",
-        },
+        // {
+        //   id: 19,
+        //   name: "",
+        //   price: "",
+        //   image: "",
+        //   description: "",
+        //   calories: "",
+        //   price: "",
+        // },
       ],
     },
 
@@ -260,214 +247,304 @@ export const Home = () => {
 
     {
       id: 5,
-      name: "",
-      categories: [2, 5],
-      image: "",
-      duration: "",
-      priceRting: "",
+      name: "noodles",
+      categories: [5, 8],
+      image: IMAGES.noodles1,
+      duration: "15mins-20mins",
+      priceRating: "affordable",
+      serviceWorker: "infinity kitchen",
       courier: {
-        name: "",
-        location: "",
+        name: "henry",
+        location: "sun-sun",
       },
       menu: [
         {
           id: 20,
-          name: "",
-          price: "",
-          image: "",
-          description: "",
-          calories: "",
-          price: "",
+          name: "indomitable noodles",
+          price: "999",
+          image: IMAGES.noodles2,
+          description: "food gives us energy",
+          calories: 30,
         },
         {
           id: 21,
-          name: "",
-          price: "",
-          image: "",
-          description: "",
-          calories: "",
-          price: "",
+          name: "golden penny noodles",
+          price: 799,
+          image: IMAGES.noodles3,
+          description: "food gives us energy",
+          calories: 35,
         },
         {
           id: 22,
-          name: "",
-          price: "",
-          image: "",
-          description: "",
-          calories: "",
-          price: "",
+          name: "onions noodles",
+          price: "699",
+          image: IMAGES.noodles1,
+          description: "food gives us energy",
+          calories: 44,
+        },
+        // {
+        //   id: 23,
+        //   name: "",
+        //   price: "",
+        //   image: "",
+        //   description: "",
+        //   calories: "",
+        //   price: "",
+        // },
+        // {
+        //   id: 24,
+        //   name: "",
+        //   price: "",
+        //   image: "",
+        //   description: "",
+        //   calories: "",
+        //   price: "",
+        // },
+      ],
+    },
+
+    // six
+
+    {
+      id: 6,
+      name: "potatoes",
+      categories: [6],
+      image: IMAGES.potatoes1,
+      duration: "20mins-30mins",
+      priceRating: "fair price",
+      serviceWorker: "infinity kitchen",
+      courier: {
+        name: "jack",
+        location: "arowomole",
+      },
+      menu: [
+        {
+          id: 25,
+          name: "fried potatoes",
+          price: "499",
+          image: IMAGES.potatoes2,
+          description: "food gives us energy",
+          calories: 60,
         },
         {
-          id: 23,
-          name: "",
-          price: "",
-          image: "",
-          description: "",
-          calories: "",
-          price: "",
+          id: 26,
+          name: "potato porridge",
+          price: 599,
+          image: IMAGES.potatoes3,
+          description: "food gives us energy",
+          calories: 65,
         },
         {
-          id: 24,
-          name: "",
-          price: "",
-          image: "",
-          description: "",
-          calories: "",
-          price: "",
+          id: 27,
+          name: "garnished potatoes",
+          price: "799",
+          image: IMAGES.potatoes1,
+          description: "food gives us energy",
+          calories: 55,
         },
+        {
+          id: 28,
+          name: "irish potatoes",
+          price: "689",
+          image: IMAGES.potatoes2,
+          description: "food gives us energy",
+          calories: 45,
+        },
+        // {
+        //   id: 29,
+        //   name: "",
+        //   price: "",
+        //   image: "",
+        //   description: "",
+        //   calories: "",
+        //   price: "",
+        // },
+      ],
+    },
+    // seven
+    {
+      id: 7,
+      name: "Rice",
+      categories: [7, 3],
+      serviceWorker: "infinity kitchen",
+      image: IMAGES.rice1,
+      duration: "45mins-1hour",
+      priceRating: "expensive",
+      courier: {
+        name: "danny",
+        location: "south coast",
+      },
+      menu: [
+        {
+          id: 30,
+          name: "fried rice",
+          price: "2999",
+          image: IMAGES.rice2,
+          description: "food gives us energy",
+          calories: 78,
+        },
+        {
+          id: 31,
+          name: "white rice",
+          price: 1599,
+          image: IMAGES.rice3,
+          description: "food gives us energy",
+          calories: 85,
+        },
+        {
+          id: 32,
+          name: "coconut rice",
+          price: "1499",
+          image: IMAGES.rice4,
+          description: "food gives us energy",
+          calories: 75,
+        },
+        {
+          id: 33,
+          name: "jollof rice",
+          price: "2099",
+          image: IMAGES.rice1,
+          description: "food gives us energy",
+          calories: 85,
+        },
+        // {
+        //   id: 34,
+        //   name: "",
+        //   price: "",
+        //   image: "",
+        //   description: "",
+        //   calories: "",
+        //   price: "",
+        // },
+      ],
+    },
+
+    // eighth
+
+    {
+      id: 8,
+      name: "spaghetti",
+      categories: [8, 4],
+      image: IMAGES.spag1,
+      serviceWorker: "infinity kitchen",
+      duration: "30mins-45mins",
+      priceRating: "fair price",
+      courier: {
+        name: "amy",
+        location: "north coast",
+      },
+      menu: [
+        {
+          id: 35,
+          name: "stir fried spag",
+          price: "2599",
+          image: IMAGES.spag2,
+          description: "food gives us energy",
+          calories: 78,
+        },
+        {
+          id: 36,
+          name: "white spag & stew",
+          price: 1599,
+          image: IMAGES.spag3,
+          description: "food gives us energy",
+          calories: 85,
+        },
+        {
+          id: 37,
+          name: "red spag",
+          price: "1099",
+          image: IMAGES.spag4,
+          description: "food gives us energy",
+          calories: 75,
+        },
+        {
+          id: 38,
+          name: "jollof spag",
+          price: "1999",
+          image: IMAGES.spag1,
+          description: "food gives us energy",
+          calories: 85,
+        },
+        // {
+        //   id: 39,
+        //   name: "",
+        //   price: "",
+        //   image: "",
+        //   description: "",
+        //   calories: "",
+        //   price: "",
+        // },
       ],
     },
   ];
 
   const category = [
     {
-      name: "Yam",
+      name: "beans",
       id: 1,
-      image: "",
+      image: IMAGES.beans1,
     },
     {
-      name: "Potatoes",
+      name: "bread",
       id: 2,
-      image: "",
+      image: IMAGES.bread1,
     },
     {
-      name: "Rice",
+      name: "chicken",
       id: 3,
-      image: "",
+      image: IMAGES.chicken1,
     },
     {
-      name: "Beans",
+      name: "fish",
       id: 4,
-      image: "",
+      image: IMAGES.fish1,
     },
     {
-      name: "Spag",
+      name: "noodles",
       id: 5,
-      image: "",
+      image: IMAGES.noodles1,
     },
     {
-      name: "Noodles",
+      name: "potatoes",
       id: 6,
-      image: "",
+      image: IMAGES.potatoes1,
     },
     {
-      name: "Marcaroni",
+      name: "rice",
       id: 7,
-      image: "",
+      image: IMAGES.rice1,
+    },
+    {
+      name: "spaghetti",
+      id: 8,
+      image: IMAGES.spag1,
     },
   ];
 
-  const Header = () => {
-    return (
-      <View>
-        <View
-          style={{
-            flexDirection: "row",
-            width: "100%",
-            height: 50,
-            marginTop: 9,
-          }}
-        >
-          <View
-            style={{
-              flex: 1,
-              paddingLeft: 15,
-              justifyContent: "center",
-            }}
-          >
-            <Text text="Account" color={COLORS.base1} />
-          </View>
-          <View
-            style={{
-              flex: 2.5,
-              backgroundColor: "darkgray",
-              borderRadius: 15,
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <Text text="Location" color={COLORS.base1} />
-          </View>
-          <View
-            style={{
-              flex: 1,
-              paddingRight: 15,
-              alignItems: "flex-end",
-              justifyContent: "center",
-            }}
-          >
-            <Text text="Cart" color={COLORS.base1} />
-          </View>
-        </View>
-        <Text
-          text="Main"
-          textStyle={{
-            marginLeft: 10,
-            fontSize: SIZES.h1,
-            fontWeight: "bold",
-          }}
-        />
-        <Text
-          text="Categories"
-          textStyle={{
-            marginLeft: 10,
-            fontSize: SIZES.h1,
-            fontWeight: "bold",
-          }}
-        />
-      </View>
-    );
-  };
+//   const Header = () => {
+//     return (
+//       <View>
+//  </View>
+//     );
+//   };
 
-  const TopCategory = () => {
-    return (
-      <FlatList
-        horizontal
-        keyExtractor={(item) => item.id}
-        data={category}
-        renderItem={renderItem}
-        contentContainerStyle={{
-          marginLeft: 5,
-          marginRight: 10,
-          marginTop: 20,
-        }}
-      />
-    );
-  };
+//   const TopCategory = () => {
+//     return (
+// <View></View>
+//     );
+//   };
 
-  const renderItem = ({ item }) => {
-    const handlePress = (item) => {
-      const restaurantList = restaurantData.filter((a) =>
-        a.categories.includes(item.id)
-      );
-      console.warn(restaurantList);
-      setNumber(item);
-    };
 
-    return (
-      <TouchableOpacity
-        onPress={() => handlePress(item)}
-        key={item.id}
-        activeOpacity={5}
-        style={{
-          marginLeft: 12,
-          backgroundColor: number.id === item.id ? "darkgray" : "orange",
-          height: 90,
-          width: 65,
-          alignItems: "center",
-          justifyContent: "flex-start",
-          borderRadius: SIZES.radius,
-        }}
-      >
-        <Text text={item.name} />
-      </TouchableOpacity>
-    );
-  };
+//     return (
+// <View></View>
+//     )
+//   };
 
   return (
     <View>
-      {Header()}
-      {TopCategory()}
+      {/* {Header()}
+      {TopCategory()} */}
     </View>
   );
 };
