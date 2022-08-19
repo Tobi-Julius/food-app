@@ -1,9 +1,8 @@
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Home } from "../screens";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { COLORS,  } from "../constants";
+import { COLORS, ICONS } from "../constants";
 import Svg, { Path } from "react-native-svg";
 
 const Tab = createBottomTabNavigator();
@@ -15,15 +14,14 @@ const Tabs = () => {
     return isSelected ? (
       <View style={{ flex: 1, alignItems: "center" }}>
         <View style={{ flexDirection: "row", position: "absolute", top: 0 }}>
-          <View style={{ flex: 1, backgroundColor: COLORS.white }}></View>
-          <Svg height={60} width={60} viewBox="0 0 10 10">
+          <View style={{ flex: 1, backgroundColor: COLORS.gray1 }} />
+          <Svg width={70} height={65} viewBox="0 0 75 61">
             <Path
               d="M75.2 0v61H0V0c4.1 0 7.4 3.1 7.9 7.1C10 21.7 22.5 33 37.7 33c15.2 0 27.7-11.3 29.7-25.9.5-4 3.9-7.1 7.9-7.1h-.1z"
               fill={COLORS.white}
             />
-
           </Svg>
-          <View style={{ flex: 1, backgroundColor: COLORS.gray1 }}></View>
+          <View style={{ flex: 1, backgroundColor: COLORS.gray1 }} />
         </View>
         <TouchableOpacity
           style={{
@@ -73,8 +71,15 @@ const Tabs = () => {
         name="Home"
         component={Home}
         options={{
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="home" color={color} size={size} />
+          tabBarIcon: ({ focused }) => (
+            <Image
+              source={ICONS.cutlery}
+              style={{
+                tintColor: focused ? COLORS.orange : COLORS.gray2,
+                height: 22,
+                width: 22,
+              }}
+            />
           ),
           tabBarButton: (props) => <TabBarCustomButton {...props} />,
         }}
@@ -83,8 +88,15 @@ const Tabs = () => {
         name="Hoe"
         component={Home}
         options={{
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="home" color={color} size={size} />
+          tabBarIcon: ({ focused }) => (
+            <Image
+              source={ICONS.search}
+              style={{
+                tintColor: focused ? COLORS.orange : COLORS.gray2,
+                height: 22,
+                width: 22,
+              }}
+            />
           ),
           tabBarButton: (props) => <TabBarCustomButton {...props} />,
         }}
@@ -93,8 +105,15 @@ const Tabs = () => {
         name="Ho"
         component={Home}
         options={{
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="home" color={color} size={size} />
+          tabBarIcon: ({ focused }) => (
+            <Image
+              source={ICONS.like}
+              style={{
+                tintColor: focused ? COLORS.orange : COLORS.gray2,
+                height: 22,
+                width: 22,
+              }}
+            />
           ),
           tabBarButton: (props) => <TabBarCustomButton {...props} />,
         }}
@@ -103,8 +122,15 @@ const Tabs = () => {
         name="H"
         component={Home}
         options={{
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="home" color={color} size={size} />
+          tabBarIcon: ({ focused }) => (
+            <Image
+              source={ICONS.user}
+              style={{
+                tintColor: focused ? COLORS.orange : COLORS.gray2,
+                height: 22,
+                width: 22,
+              }}
+            />
           ),
           tabBarButton: (props) => <TabBarCustomButton {...props} />,
         }}

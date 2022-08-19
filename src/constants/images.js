@@ -27,6 +27,8 @@ const spag2 = require("../assets/images/spag2.jpg");
 const spag3 = require("../assets/images/spag3.jpg");
 const spag4 = require("../assets/images/spag4.jpg");
 
+
+
 export const IMAGES = {
   beans1,
   beans2,
@@ -56,4 +58,5 @@ export const IMAGES = {
   spag2,
   spag3,
   spag4,
+
 };

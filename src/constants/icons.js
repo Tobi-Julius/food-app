@@ -23,6 +23,15 @@ const star = require("../assets/icons/star.png");
 const sushi = require("../assets/icons/sushi.png");
 const user = require("../assets/icons/user.png");
 
+const chickenleg = require("../assets/icons/chicken-leg.png");
+const pasta = require("../assets/icons/pasta.png");
+const redbeans = require("../assets/icons/red-beans.png");
+const noodles = require("../assets/icons/noodles.png");
+const bread = require("../assets/icons/bread.png");
+const fish = require("../assets/icons/fish.png");
+const potato = require("../assets/icons/potato.png");
+const rice = require("../assets/icons/rice.png");
+
 export const ICONS = {
   back,
   car,
@@ -48,4 +57,12 @@ export const ICONS = {
   star,
   sushi,
   user,
+  redbeans,
+  bread,
+  chickenleg,
+  noodles,
+  pasta,
+  fish,
+  potato,
+  rice,
 };

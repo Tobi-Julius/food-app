@@ -3,9 +3,9 @@ import React, { useCallback, useEffect } from "react";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 
-export const Text = ({ text, textStyle, textAlign, ...others }) => {
+export const TextMedium = ({ text, textStyle, textAlign, ...others }) => {
   const [fontsLoaded] = useFonts({
-    'Nunito': require("../../assets/fonts/Nunito-Regular.ttf"),
+    NunitoMedium: require("../../assets/fonts/Nunito-SemiBold.ttf"),
   });
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export const Text = ({ text, textStyle, textAlign, ...others }) => {
   return (
     <MainText
       onLayout={onLayout}
-      style={[textStyle, textAlign, { fontFamily: "Nunito" }]}
+      style={[textStyle, textAlign, { fontFamily: "NunitoMedium" }]}
       {...others}
     >
       {text}

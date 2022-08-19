@@ -1,23 +1,54 @@
-import { Text } from "../component/common";
-import React, { useState } from "react";
-import { StyleSheet, View, FlatList, TouchableOpacity } from "react-native";
-import { COLORS, IMAGES, SIZES } from "../constants";
-export const Home = () => {
-  const [number, setNumber] = useState("");
-  const [categories, setCategories] = useState(category);
-  const [selectedCategory, setSelectedCategory] = useState("all");
-  const [restaurant, setRestaurant] = useState(restaurantData);
+import { Text, TextMedium, TextBold } from "../component/common";
+import React, { useState, useEffect } from "react";
+import {
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  FlatList,
+  Image,
+} from "react-native";
+import { COLORS, ICONS, IMAGES, SIZES } from "../constants";
+import * as Location from "expo-location";
+
+export const Home = ({ navigation }) => {
+  const [area, setArea] = useState("waiting...");
+
+
+  useEffect(() => {
+    (async () => {
+      const { status } = await Location.requestForegroundPermissionsAsync();
+      if (status === "granted") {
+        const areaEncode = await Location.getCurrentPositionAsync({});
+        const areaDetail = await Location.reverseGeocodeAsync(
+          areaEncode.coords
+        );
+        areaDetail.map((yourLocation) => {
+          if (yourLocation.name !== "Unnamed Road") {
+            setArea(yourLocation.name);
+          } else {
+            setArea(yourLocation.city);
+          }
+        });
+      } else {
+        setArea("permission denied");
+      }
+    })();
+    return () => {
+       
+    };
+  }, []);
 
   const restaurantData = [
     // one
-
     {
       id: 1,
       name: "beans",
       categories: [1, 2],
       image: IMAGES.beans1,
+
       duration: "45mins-1hour",
       priceRating: "affordable",
+      rating: 3.5,
       serviceWorker: "infinity kitchen",
       courier: {
         name: "Julie",
@@ -50,7 +81,7 @@ export const Home = () => {
         },
         // {
         //   id: 4,
-        //   name: "",
+        //   name: "",00
         //   price: "",
         //   image: "",
         //   description: "",
@@ -73,6 +104,7 @@ export const Home = () => {
       id: 2,
       name: "bread",
       categories: [2, 1],
+      rating: 3.8,
       image: IMAGES.bread1,
       duration: "30mins-35mins",
       priceRating: "fair price",
@@ -132,6 +164,7 @@ export const Home = () => {
       name: "chicken",
       categories: [3, 4],
       image: IMAGES.chicken1,
+      rating: 4.2,
       duration: "20mins-30min",
       priceRating: "expensive",
       serviceWorker: "infinity kitchen",
@@ -189,6 +222,7 @@ export const Home = () => {
     {
       id: 4,
       name: "fish",
+      rating: 4.7,
       serviceWorker: "infinity kitchen",
       categories: [4, 8],
       image: IMAGES.fish1,
@@ -249,6 +283,7 @@ export const Home = () => {
       id: 5,
       name: "noodles",
       categories: [5, 8],
+      rating: 4.8,
       image: IMAGES.noodles1,
       duration: "15mins-20mins",
       priceRating: "affordable",
@@ -308,6 +343,7 @@ export const Home = () => {
     {
       id: 6,
       name: "potatoes",
+      rating: 4.6,
       categories: [6],
       image: IMAGES.potatoes1,
       duration: "20mins-30mins",
@@ -366,6 +402,7 @@ export const Home = () => {
       id: 7,
       name: "Rice",
       categories: [7, 3],
+      rating: 4.3,
       serviceWorker: "infinity kitchen",
       image: IMAGES.rice1,
       duration: "45mins-1hour",
@@ -425,6 +462,7 @@ export const Home = () => {
       id: 8,
       name: "spaghetti",
       categories: [8, 4],
+      rating: 3.6,
       image: IMAGES.spag1,
       serviceWorker: "infinity kitchen",
       duration: "30mins-45mins",
@@ -483,68 +521,270 @@ export const Home = () => {
     {
       name: "beans",
       id: 1,
-      image: IMAGES.beans1,
+      image: ICONS.redbeans,
     },
     {
       name: "bread",
       id: 2,
-      image: IMAGES.bread1,
+      image: ICONS.bread,
     },
     {
       name: "chicken",
       id: 3,
-      image: IMAGES.chicken1,
+      image: ICONS.chickenleg,
     },
     {
       name: "fish",
       id: 4,
-      image: IMAGES.fish1,
+      image: ICONS.fish,
     },
     {
       name: "noodles",
       id: 5,
-      image: IMAGES.noodles1,
+      image: ICONS.noodles,
     },
     {
       name: "potatoes",
       id: 6,
-      image: IMAGES.potatoes1,
+      image: ICONS.potato,
     },
     {
       name: "rice",
       id: 7,
-      image: IMAGES.rice1,
+      image: ICONS.rice,
     },
     {
       name: "spaghetti",
       id: 8,
-      image: IMAGES.spag1,
+      image: ICONS.pasta,
     },
   ];
 
-//   const Header = () => {
-//     return (
-//       <View>
-//  </View>
-//     );
-//   };
+  const [categories, setCategories] = useState({ category });
+  const [restaurant, setRestaurant] = useState(restaurantData);
 
-//   const TopCategory = () => {
-//     return (
-// <View></View>
-//     );
-//   };
+  const _handlePress = (item) => {
+    const restaurantList = restaurantData.filter((a) =>
+      a.categories.includes(item.id)
+    );
+    setRestaurant(restaurantList);
+    setCategories(item);
+  };
 
+  const Header = () => {
+    return (
+      <View>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            marginTop: SIZES.base,
+            marginLeft: SIZES.font * 1.12,
+            marginRight: SIZES.font * 1.12,
+            alignItems: "center",
+          }}
+        >
+          <Image source={ICONS.location} style={{ width: 25, height: 25 }} />
+          <TextMedium
+            ellipsizeMode="tail"
+            textStyle={{
+              color: COLORS.dark,
+              backgroundColor: COLORS.gray2,
+              // padding: SIZES.base,
+              padding: SIZES.font,
+              borderRadius: SIZES.font,
+              textAlign: "center",
+              width: "53%",
+            }}
+            text={area}
+          />
 
-//     return (
-// <View></View>
-//     )
-//   };
+          <Image
+            source={ICONS.shoppingbasket}
+            style={{ width: 22, height: 22 }}
+          />
+        </View>
+      </View>
+    );
+  };
+
+  const _renderItem = ({ item, index }) => {
+    return (
+      <TouchableOpacity
+        onPress={() => _handlePress(item)}
+        activeOpacity={4}
+        style={{
+          backgroundColor:
+            categories.id === item.id ? COLORS.orange : COLORS.gray2,
+          height: 98,
+          width: 60,
+          alignItems: "center",
+          justifyContent: "center",
+          marginLeft: 15,
+          borderRadius: 30,
+        }}
+      >
+        <View
+          style={{
+            backgroundColor: COLORS.white,
+            height: 45,
+            width: 45,
+            borderRadius: 22,
+            alignItems: "center",
+            justifyContent: "center",
+            marginBottom: 4,
+          }}
+        >
+          <Image
+            source={item.image}
+            style={{ width: 28, height: 28, borderRadius: 12 }}
+          />
+        </View>
+        <Text
+          textStyle={{ fontSize: SIZES.body5, textTransform: "capitalize" }}
+          text={item.name}
+        />
+      </TouchableOpacity>
+    );
+  };
+
+  const TopCategory = () => {
+    return (
+      <View style={{ marginLeft: 15, marginTop: 15 }}>
+        <TextBold textStyle={{ fontSize: SIZES.h2 }} text="Main" />
+        <TextBold textStyle={{ fontSize: SIZES.h2 }} text="Categories" />
+        <View>
+          <FlatList
+            showsHorizontalScrollIndicator={false}
+            horizontal={true}
+            data={category}
+            renderItem={_renderItem}
+            contentContainerStyle={{
+              marginVertical: 15,
+              marginHorizontal: -15,
+            }}
+          />
+        </View>
+      </View>
+    );
+  };
+
+  const _renderBody = ({ item }) => {
+    return (
+      <TouchableOpacity
+        onPress={() =>
+          navigation.navigate("OrderDelivery", {
+            item,
+          })
+        }
+        style={{
+          marginBottom: 40,
+          overflow: "scroll",
+        }}
+        activeOpacity={0.7}
+      >
+        <View style={{ width: SIZES.width }}>
+          <View>
+            <Image
+              source={item.image}
+              style={{
+                width: "97%",
+                height: 210,
+                resizeMode: "cover",
+                borderRadius: SIZES.radius3 * 1.6,
+              }}
+            />
+            <View
+              style={{
+                position: "absolute",
+                bottom: 0,
+                backgroundColor: COLORS.white,
+                borderTopRightRadius: SIZES.radius3 * 1.6,
+                borderBottomLeftRadius: SIZES.radius3 * 1.6,
+              }}
+            >
+              <TextBold
+                textStyle={{
+                  color: COLORS.dark,
+                  padding: SIZES.padding1 * 1.61,
+                }}
+                text={item.duration}
+              />
+            </View>
+          </View>
+          <TextBold
+            textStyle={{ textTransform: "capitalize", fontSize: SIZES.h4 }}
+            text={`${item.name} Variety`}
+          />
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              margin: 3,
+            }}
+          >
+            <Image
+              source={ICONS.star}
+              style={{
+                width: 15,
+                height: 15,
+                marginRight: 7,
+              }}
+            />
+            <TextMedium textStyle={{ marginRight: 6 }} text={item.rating} />
+            <TextMedium textStyle={{ marginRight: 6 }} text={item.name} />
+            <TextMedium
+              textStyle={{ marginRight: 6 }}
+              text={item.serviceWorker}
+            />
+            {item.priceRating === "affordable" ? (
+              <View style={{ flexDirection: "row" }}>
+                <Text textStyle={{ color: COLORS.dark }} text="$" />
+                <Text textStyle={{ color: COLORS.gray2 }} text="$" />
+                <Text textStyle={{ color: COLORS.gray2 }} text="$" />
+              </View>
+            ) : item.priceRating === "fair price" ? (
+              <View style={{ flexDirection: "row" }}>
+                <Text textStyle={{ color: COLORS.dark }} text="$" />
+                <Text textStyle={{ color: COLORS.dark }} text="$" />
+                <Text textStyle={{ color: COLORS.gray2 }} text="$" />
+              </View>
+            ) : (
+              <View style={{ flexDirection: "row" }}>
+                <Text textStyle={{ color: COLORS.dark }} text="$" />
+                <Text textStyle={{ color: COLORS.dark }} text="$" />
+                <Text textStyle={{ color: COLORS.dark }} text="$" />
+              </View>
+            )}
+          </View>
+        </View>
+      </TouchableOpacity>
+    );
+  };
+
+  const BodyContent = () => {
+    return (
+      <View style={{}}>
+        <FlatList
+          scrollEnabled={true}
+          showsVerticalScrollIndicator={false}
+          data={restaurant}
+          renderItem={_renderBody}
+          contentContainerStyle={{
+            marginVertical: 15,
+            marginHorizontal: 7,
+          }}
+        />
+        <View style={{ marginTop: -600 }} />
+      </View>
+    );
+  };
 
   return (
     <View>
-      {/* {Header()}
-      {TopCategory()} */}
+      {Header()}
+      {TopCategory()}
+      {BodyContent()}
     </View>
   );
 };

@@ -10,7 +10,7 @@ const Stack = createNativeStackNavigator();
 function App() {
   return (
     <NavigationContainer>
-      <StatusBar backgroundColor={COLORS.secondary} />
+      <StatusBar backgroundColor={COLORS.white} />
       <Stack.Navigator
         screenOptions={{
           headerShown: false,
