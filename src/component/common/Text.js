@@ -5,7 +5,7 @@ import * as SplashScreen from "expo-splash-screen";
 
 export const Text = ({ text, textStyle, textAlign, ...others }) => {
   const [fontsLoaded] = useFonts({
-    'Nunito': require("../../assets/fonts/Nunito-Regular.ttf"),
+    Nunito: require("../../assets/fonts/Nunito-Regular.ttf"),
   });
 
   useEffect(() => {

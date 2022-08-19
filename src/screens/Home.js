@@ -13,7 +13,6 @@ import * as Location from "expo-location";
 export const Home = ({ navigation }) => {
   const [area, setArea] = useState("waiting...");
 
-
   useEffect(() => {
     (async () => {
       const { status } = await Location.requestForegroundPermissionsAsync();
@@ -33,9 +32,7 @@ export const Home = ({ navigation }) => {
         setArea("permission denied");
       }
     })();
-    return () => {
-       
-    };
+    return () => {};
   }, []);
 
   const restaurantData = [
@@ -60,7 +57,8 @@ export const Home = ({ navigation }) => {
           name: "norwegian beans",
           price: "500",
           image: IMAGES.beans2,
-          description: "food gives us energy",
+          description:
+            "food delivery apps became obvious in the lives of today food consumers.",
           calories: 200,
         },
         {
@@ -68,7 +66,8 @@ export const Home = ({ navigation }) => {
           name: "agoyin beans",
           price: "300",
           image: IMAGES.beans1,
-          description: "food gives us energy",
+          description:
+            "food delivery apps became obvious in the lives of today food consumers.",
           calories: 190,
         },
         {
@@ -76,7 +75,8 @@ export const Home = ({ navigation }) => {
           name: "beans soup",
           price: 400,
           image: IMAGES.beans2,
-          description: "food gives us energy",
+          description:
+            "food delivery apps became obvious in the lives of today food consumers.",
           calories: 180,
         },
         // {
@@ -119,7 +119,8 @@ export const Home = ({ navigation }) => {
           name: "buttered bread",
           price: "750",
           image: IMAGES.bread2,
-          description: "food gives us energy",
+          description:
+            "food delivery apps became obvious in the lives of today food consumers.",
           calories: 70,
         },
         {
@@ -127,7 +128,8 @@ export const Home = ({ navigation }) => {
           name: "wheat bread",
           price: 600,
           image: IMAGES.bread3,
-          description: "food gives us energy",
+          description:
+            "food delivery apps became obvious in the lives of today food consumers.",
           calories: 85,
         },
         {
@@ -135,7 +137,8 @@ export const Home = ({ navigation }) => {
           name: "chocolate bread",
           price: 1100,
           image: IMAGES.bread4,
-          description: "food gives us energy",
+          description:
+            "food delivery apps became obvious in the lives of today food consumers.",
           calories: 100,
         },
         {
@@ -143,7 +146,8 @@ export const Home = ({ navigation }) => {
           name: "coconut bread",
           price: "899",
           image: IMAGES.bread1,
-          description: "food gives us energy",
+          description:
+            "food delivery apps became obvious in the lives of today food consumers.",
           calories: 103,
         },
         // {
@@ -178,7 +182,8 @@ export const Home = ({ navigation }) => {
           name: "garnished chicken",
           price: "7000",
           image: IMAGES.chicken2,
-          description: "food gives us energy",
+          description:
+            "food delivery apps became obvious in the lives of today food consumers.",
           calories: 55,
         },
         {
@@ -186,7 +191,8 @@ export const Home = ({ navigation }) => {
           name: "roasted chicken",
           price: "6500",
           image: IMAGES.chicken3,
-          description: "food gives us energy",
+          description:
+            "food delivery apps became obvious in the lives of today food consumers.",
           calories: 52,
         },
         {
@@ -194,7 +200,8 @@ export const Home = ({ navigation }) => {
           name: "midly done chicken",
           price: 6000,
           image: IMAGES.chicken4,
-          description: "food gives us energy",
+          description:
+            "food delivery apps became obvious in the lives of today food consumers.",
           calories: 35,
         },
         {
@@ -202,7 +209,8 @@ export const Home = ({ navigation }) => {
           name: "chicken lap",
           price: 2500,
           image: IMAGES.chicken1,
-          description: "food gives us energy",
+          description:
+            "food delivery apps became obvious in the lives of today food consumers.",
           calories: 25,
         },
         // {
@@ -238,7 +246,8 @@ export const Home = ({ navigation }) => {
           name: "ganished fish",
           price: 2499,
           image: IMAGES.fish2,
-          description: "food gives us energy",
+          description:
+            "food delivery apps became obvious in the lives of today food consumers.",
           calories: 49,
         },
         {
@@ -246,7 +255,8 @@ export const Home = ({ navigation }) => {
           name: "fried fish",
           price: 2199,
           image: IMAGES.fish3,
-          description: "food gives us energy",
+          description:
+            "food delivery apps became obvious in the lives of today food consumers.",
           calories: 69,
         },
         {
@@ -254,7 +264,8 @@ export const Home = ({ navigation }) => {
           name: "smoked fish",
           price: "1599",
           image: IMAGES.fish4,
-          description: "food gives us energy",
+          description:
+            "food delivery apps became obvious in the lives of today food consumers.",
           calories: 40,
         },
         {
@@ -262,7 +273,8 @@ export const Home = ({ navigation }) => {
           name: "midly done fish",
           price: 1099,
           image: IMAGES.fish1,
-          description: "food gives us energy",
+          description:
+            "food delivery apps became obvious in the lives of today food consumers.",
           calories: 55,
         },
         // {
@@ -298,7 +310,8 @@ export const Home = ({ navigation }) => {
           name: "indomitable noodles",
           price: "999",
           image: IMAGES.noodles2,
-          description: "food gives us energy",
+          description:
+            "food delivery apps became obvious in the lives of today food consumers.",
           calories: 30,
         },
         {
@@ -306,7 +319,8 @@ export const Home = ({ navigation }) => {
           name: "golden penny noodles",
           price: 799,
           image: IMAGES.noodles3,
-          description: "food gives us energy",
+          description:
+            "food delivery apps became obvious in the lives of today food consumers.",
           calories: 35,
         },
         {
@@ -314,7 +328,8 @@ export const Home = ({ navigation }) => {
           name: "onions noodles",
           price: "699",
           image: IMAGES.noodles1,
-          description: "food gives us energy",
+          description:
+            "food delivery apps became obvious in the lives of today food consumers.",
           calories: 44,
         },
         // {
@@ -359,7 +374,8 @@ export const Home = ({ navigation }) => {
           name: "fried potatoes",
           price: "499",
           image: IMAGES.potatoes2,
-          description: "food gives us energy",
+          description:
+            "food delivery apps became obvious in the lives of today food consumers.",
           calories: 60,
         },
         {
@@ -367,7 +383,8 @@ export const Home = ({ navigation }) => {
           name: "potato porridge",
           price: 599,
           image: IMAGES.potatoes3,
-          description: "food gives us energy",
+          description:
+            "food delivery apps became obvious in the lives of today food consumers.",
           calories: 65,
         },
         {
@@ -375,7 +392,8 @@ export const Home = ({ navigation }) => {
           name: "garnished potatoes",
           price: "799",
           image: IMAGES.potatoes1,
-          description: "food gives us energy",
+          description:
+            "food delivery apps became obvious in the lives of today food consumers.",
           calories: 55,
         },
         {
@@ -383,7 +401,8 @@ export const Home = ({ navigation }) => {
           name: "irish potatoes",
           price: "689",
           image: IMAGES.potatoes2,
-          description: "food gives us energy",
+          description:
+            "food delivery apps became obvious in the lives of today food consumers.",
           calories: 45,
         },
         // {
@@ -417,7 +436,8 @@ export const Home = ({ navigation }) => {
           name: "fried rice",
           price: "2999",
           image: IMAGES.rice2,
-          description: "food gives us energy",
+          description:
+            "food delivery apps became obvious in the lives of today food consumers.",
           calories: 78,
         },
         {
@@ -425,7 +445,8 @@ export const Home = ({ navigation }) => {
           name: "white rice",
           price: 1599,
           image: IMAGES.rice3,
-          description: "food gives us energy",
+          description:
+            "food delivery apps became obvious in the lives of today food consumers.",
           calories: 85,
         },
         {
@@ -433,7 +454,8 @@ export const Home = ({ navigation }) => {
           name: "coconut rice",
           price: "1499",
           image: IMAGES.rice4,
-          description: "food gives us energy",
+          description:
+            "food delivery apps became obvious in the lives of today food consumers.",
           calories: 75,
         },
         {
@@ -441,7 +463,8 @@ export const Home = ({ navigation }) => {
           name: "jollof rice",
           price: "2099",
           image: IMAGES.rice1,
-          description: "food gives us energy",
+          description:
+            "food delivery apps became obvious in the lives of today food consumers.",
           calories: 85,
         },
         // {
@@ -477,7 +500,8 @@ export const Home = ({ navigation }) => {
           name: "stir fried spag",
           price: "2599",
           image: IMAGES.spag2,
-          description: "food gives us energy",
+          description:
+            "food delivery apps became obvious in the lives of today food consumers.",
           calories: 78,
         },
         {
@@ -485,7 +509,8 @@ export const Home = ({ navigation }) => {
           name: "white spag & stew",
           price: 1599,
           image: IMAGES.spag3,
-          description: "food gives us energy",
+          description:
+            "food delivery apps became obvious in the lives of today food consumers.",
           calories: 85,
         },
         {
@@ -493,7 +518,8 @@ export const Home = ({ navigation }) => {
           name: "red spag",
           price: "1099",
           image: IMAGES.spag4,
-          description: "food gives us energy",
+          description:
+            "food delivery apps became obvious in the lives of today food consumers.",
           calories: 75,
         },
         {
@@ -501,7 +527,8 @@ export const Home = ({ navigation }) => {
           name: "jollof spag",
           price: "1999",
           image: IMAGES.spag1,
-          description: "food gives us energy",
+          description:
+            "food delivery apps became obvious in the lives of today food consumers.",
           calories: 85,
         },
         // {
@@ -732,9 +759,12 @@ export const Home = ({ navigation }) => {
               }}
             />
             <TextMedium textStyle={{ marginRight: 6 }} text={item.rating} />
-            <TextMedium textStyle={{ marginRight: 6 }} text={item.name} />
             <TextMedium
-              textStyle={{ marginRight: 6 }}
+              textStyle={{ marginRight: 6, textTransform: "capitalize" }}
+              text={item.name}
+            />
+            <TextMedium
+              textStyle={{ marginRight: 6, textTransform: "capitalize" }}
               text={item.serviceWorker}
             />
             {item.priceRating === "affordable" ? (
