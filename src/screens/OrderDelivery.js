@@ -3,7 +3,6 @@ import {
   View,
   Image,
   TouchableOpacity,
-  TextInput,
   ScrollView,
   Animated,
 } from "react-native";
@@ -12,33 +11,33 @@ import React, { useState } from "react";
 import { Text, TextMedium, TextBold, Button } from "../component/common";
 
 export const OrderDelivery = ({ navigation, route }) => {
-  const { item } = route.params;
+  const { item, area, gpsData } = route.params;
   const [orderItems, setOrderItems] = useState([]);
 
   const handlePress = (action, id, price) => {
     const orderList = orderItems.slice();
-    const item = orderList.filter((a) => a.id === id);
+    const item = orderList.find((a) => a.id === id);
     if (action === "+") {
-      if (item.length > 0) {
-        const newQty = item[0].qty + 1;
-        item[0].qty = newQty;
-        item[0].total = item[0].qty * price;
+      if (item) {
+        const newQty = item.qty + 1;
+        item.qty = newQty;
+        item.total = item.qty * price;
       } else {
         const newItem = {
-          id: id,
+          id,
+          price,
           qty: 1,
-          price: price,
           total: price,
         };
         orderList.push(newItem);
       }
       setOrderItems(orderList);
     } else {
-      if (item.length > 0) {
-        if (item[0].qty > 0) {
-          const newQty = item[0].qty - 1;
-          item[0].qty = newQty;
-          item[0].total = newQty * price;
+      if (item) {
+        if (item.qty > 0) {
+          const newQty = item.qty - 1;
+          item.qty = newQty;
+          item.total = newQty * price;
         }
       }
       setOrderItems(orderList);
@@ -46,9 +45,9 @@ export const OrderDelivery = ({ navigation, route }) => {
   };
 
   const handleText = (id) => {
-    const orderItem = orderItems.filter((a) => a.id === id);
-    if (orderItem.length > 0) {
-      return orderItem[0].qty;
+    const orderItem = orderItems.find((a) => a.id === id);
+    if (orderItem) {
+      return orderItem.qty;
     } else {
       return 0;
     }
@@ -56,7 +55,7 @@ export const OrderDelivery = ({ navigation, route }) => {
 
   const qtyCalc = () => {
     if (orderItems.length > 0) {
-      return orderItems.map((a) => a.qty).reduce((a, b) => a + b, 0);
+      return orderItems.reduce((a, b) => a + b.qty, 0);
     } else {
       return "no";
     }
@@ -64,7 +63,7 @@ export const OrderDelivery = ({ navigation, route }) => {
 
   const priceCalc = () => {
     if (orderItems.length > 0) {
-      return orderItems.map((a) => a.price).reduce((a, b) => a + b, 0);
+      return orderItems.reduce((a, b) => a + b.total, 0).toFixed(2);
     } else {
       return 0;
     }
@@ -112,9 +111,7 @@ export const OrderDelivery = ({ navigation, route }) => {
     );
   };
 
-  const [value, setValue] = useState(192);
-
-  const _renderItem = ({ item, index }) => {
+  const _renderItem = ({ item }) => {
     return (
       <View>
         <View>
@@ -270,7 +267,7 @@ export const OrderDelivery = ({ navigation, route }) => {
           marginTop: 20,
         }}
       >
-        {item?.menu.map((each, index) => {
+        {item?.menu.map((_, index) => {
           const opacity = dotPosition.interpolate({
             inputRange: [index - 1, index, index + 1],
             outputRange: [0.3, 1, 0.3],
@@ -372,9 +369,13 @@ export const OrderDelivery = ({ navigation, route }) => {
           </View>
         </View>
         <Button
+          disabled={qtyCalc() > 0 ? false : true}
+          onPress={() =>
+            navigation.navigate("Restaurant", { item, area, gpsData })
+          }
           btnText="Order"
           containerStyle={{
-            backgroundColor: COLORS.orange,
+            backgroundColor: qtyCalc() > 0 ? COLORS.orange : COLORS.gray2,
             alignItems: "center",
             borderRadius: SIZES.radius3 * 1.5,
             marginTop: 30,

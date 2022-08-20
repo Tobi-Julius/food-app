@@ -12,6 +12,7 @@ import * as Location from "expo-location";
 
 export const Home = ({ navigation }) => {
   const [area, setArea] = useState("waiting...");
+  const [gpsData, setGpsData] = useState(null);
 
   useEffect(() => {
     (async () => {
@@ -21,12 +22,15 @@ export const Home = ({ navigation }) => {
         const areaDetail = await Location.reverseGeocodeAsync(
           areaEncode.coords
         );
+        const coords = {
+          latitude: areaEncode?.coords.latitude,
+          longitude: areaEncode?.coords.longitude,
+        };
+        setGpsData(coords);
         areaDetail.map((yourLocation) => {
-          if (yourLocation.name !== "Unnamed Road") {
-            setArea(yourLocation.name);
-          } else {
-            setArea(yourLocation.city);
-          }
+          yourLocation.street
+            ? setArea(yourLocation.street)
+            : setArea(yourLocation.city);
         });
       } else {
         setArea("permission denied");
@@ -42,20 +46,22 @@ export const Home = ({ navigation }) => {
       name: "beans",
       categories: [1, 2],
       image: IMAGES.beans1,
-
       duration: "45mins-1hour",
       priceRating: "affordable",
       rating: 3.5,
       serviceWorker: "infinity kitchen",
       courier: {
         name: "Julie",
-        location: "lagos",
+        gps: {
+          latitude: 8.1406,
+          longitude: 4.2311,
+        },
       },
       menu: [
         {
           id: 1,
           name: "norwegian beans",
-          price: "500",
+          price: 500,
           image: IMAGES.beans2,
           description:
             "food delivery apps became obvious in the lives of today food consumers.",
@@ -64,7 +70,7 @@ export const Home = ({ navigation }) => {
         {
           id: 2,
           name: "agoyin beans",
-          price: "300",
+          price: 300,
           image: IMAGES.beans1,
           description:
             "food delivery apps became obvious in the lives of today food consumers.",
@@ -111,13 +117,16 @@ export const Home = ({ navigation }) => {
       serviceWorker: "infinity kitchen",
       courier: {
         name: "amy",
-        location: "ilorin",
+        gps: {
+          latitude: 8.1406,
+          longitude: 4.2311,
+        },
       },
       menu: [
         {
           id: 5,
           name: "buttered bread",
-          price: "750",
+          price: 750,
           image: IMAGES.bread2,
           description:
             "food delivery apps became obvious in the lives of today food consumers.",
@@ -144,7 +153,7 @@ export const Home = ({ navigation }) => {
         {
           id: 8,
           name: "coconut bread",
-          price: "899",
+          price: 899,
           image: IMAGES.bread1,
           description:
             "food delivery apps became obvious in the lives of today food consumers.",
@@ -174,13 +183,16 @@ export const Home = ({ navigation }) => {
       serviceWorker: "infinity kitchen",
       courier: {
         name: "remy",
-        location: "Takie",
+        gps: {
+          latitude: 8.1083,
+          longitude: 4.2495,
+        },
       },
       menu: [
         {
           id: 10,
           name: "garnished chicken",
-          price: "7000",
+          price: 7000,
           image: IMAGES.chicken2,
           description:
             "food delivery apps became obvious in the lives of today food consumers.",
@@ -189,7 +201,7 @@ export const Home = ({ navigation }) => {
         {
           id: 11,
           name: "roasted chicken",
-          price: "6500",
+          price: 6500,
           image: IMAGES.chicken3,
           description:
             "food delivery apps became obvious in the lives of today food consumers.",
@@ -238,7 +250,10 @@ export const Home = ({ navigation }) => {
       priceRating: "fair price",
       courier: {
         name: "jacob",
-        location: "stadium area",
+        gps: {
+          latitude: 8.1166,
+          longitude: 4.2295,
+        },
       },
       menu: [
         {
@@ -262,7 +277,7 @@ export const Home = ({ navigation }) => {
         {
           id: 17,
           name: "smoked fish",
-          price: "1599",
+          price: 1599,
           image: IMAGES.fish4,
           description:
             "food delivery apps became obvious in the lives of today food consumers.",
@@ -302,13 +317,16 @@ export const Home = ({ navigation }) => {
       serviceWorker: "infinity kitchen",
       courier: {
         name: "henry",
-        location: "sun-sun",
+        gps: {
+          latitude: 8.117,
+          longitude: 4.2385,
+        },
       },
       menu: [
         {
           id: 20,
           name: "indomitable noodles",
-          price: "999",
+          price: 999,
           image: IMAGES.noodles2,
           description:
             "food delivery apps became obvious in the lives of today food consumers.",
@@ -326,7 +344,7 @@ export const Home = ({ navigation }) => {
         {
           id: 22,
           name: "onions noodles",
-          price: "699",
+          price: 699,
           image: IMAGES.noodles1,
           description:
             "food delivery apps became obvious in the lives of today food consumers.",
@@ -366,13 +384,16 @@ export const Home = ({ navigation }) => {
       serviceWorker: "infinity kitchen",
       courier: {
         name: "jack",
-        location: "arowomole",
+        gps: {
+          latitude: 8.1141,
+          longitude: 4.2224,
+        },
       },
       menu: [
         {
           id: 25,
           name: "fried potatoes",
-          price: "499",
+          price: 499,
           image: IMAGES.potatoes2,
           description:
             "food delivery apps became obvious in the lives of today food consumers.",
@@ -390,7 +411,7 @@ export const Home = ({ navigation }) => {
         {
           id: 27,
           name: "garnished potatoes",
-          price: "799",
+          price: 799,
           image: IMAGES.potatoes1,
           description:
             "food delivery apps became obvious in the lives of today food consumers.",
@@ -399,7 +420,7 @@ export const Home = ({ navigation }) => {
         {
           id: 28,
           name: "irish potatoes",
-          price: "689",
+          price: 689,
           image: IMAGES.potatoes2,
           description:
             "food delivery apps became obvious in the lives of today food consumers.",
@@ -428,13 +449,16 @@ export const Home = ({ navigation }) => {
       priceRating: "expensive",
       courier: {
         name: "danny",
-        location: "south coast",
+        gps: {
+          latitude: 8.1263,
+          longitude: 4.2258,
+        },
       },
       menu: [
         {
           id: 30,
           name: "fried rice",
-          price: "2999",
+          price: 2999,
           image: IMAGES.rice2,
           description:
             "food delivery apps became obvious in the lives of today food consumers.",
@@ -452,7 +476,7 @@ export const Home = ({ navigation }) => {
         {
           id: 32,
           name: "coconut rice",
-          price: "1499",
+          price: 1499,
           image: IMAGES.rice4,
           description:
             "food delivery apps became obvious in the lives of today food consumers.",
@@ -461,7 +485,7 @@ export const Home = ({ navigation }) => {
         {
           id: 33,
           name: "jollof rice",
-          price: "2099",
+          price: 2099,
           image: IMAGES.rice1,
           description:
             "food delivery apps became obvious in the lives of today food consumers.",
@@ -492,13 +516,16 @@ export const Home = ({ navigation }) => {
       priceRating: "fair price",
       courier: {
         name: "amy",
-        location: "north coast",
+        gps: {
+          latitude: 8.1333,
+          longitude: 4.2356,
+        },
       },
       menu: [
         {
           id: 35,
           name: "stir fried spag",
-          price: "2599",
+          price: 2599,
           image: IMAGES.spag2,
           description:
             "food delivery apps became obvious in the lives of today food consumers.",
@@ -516,7 +543,7 @@ export const Home = ({ navigation }) => {
         {
           id: 37,
           name: "red spag",
-          price: "1099",
+          price: 1099,
           image: IMAGES.spag4,
           description:
             "food delivery apps became obvious in the lives of today food consumers.",
@@ -525,7 +552,7 @@ export const Home = ({ navigation }) => {
         {
           id: 38,
           name: "jollof spag",
-          price: "1999",
+          price: 1999,
           image: IMAGES.spag1,
           description:
             "food delivery apps became obvious in the lives of today food consumers.",
@@ -702,6 +729,8 @@ export const Home = ({ navigation }) => {
         onPress={() =>
           navigation.navigate("OrderDelivery", {
             item,
+            area,
+            gpsData,
           })
         }
         style={{

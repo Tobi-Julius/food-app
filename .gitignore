@@ -2,6 +2,7 @@ node_modules/
 .expo/
 dist/
 images
+.env
 icons
 npm-debug.*
 *.jks
