@@ -1,7 +1,9 @@
-import { StyleSheet, View, Image, Text } from "react-native";
+import { StyleSheet, View, Image, StatusBar } from "react-native";
 import React, { useState, useEffect } from "react";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { COLORS, ICONS, SIZES } from "../constants";
+import MapViewDirections from "react-native-maps-directions";
+import { Text } from "../component/common";
 
 export const Restaurant = ({ route }) => {
   const [value, setValue] = useState({
@@ -12,37 +14,29 @@ export const Restaurant = ({ route }) => {
     region: null,
   });
 
-  useEffect(() => {
-    let subscription = true;
-    const { item, area, gpsData } = route.params;
+  const { item, area, gpsData } = route.params;
+  const fromLoc = gpsData;
+  const toLoc = item.courier.gps;
+  const streetName = area;
 
-    if (subscription) {
-      const fromLoc = gpsData;
-      const toLoc = item.courier.gps;
-      const streetName = area;
+  const region = {
+    latitude: (fromLoc?.latitude + toLoc?.latitude) / 2,
+    longitude: (fromLoc?.longitude + toLoc?.longitude) / 2,
+    latitudeDelta: Math.abs(fromLoc?.latitude - toLoc?.latitude) * 2,
+    longitudeDelta: Math.abs(fromLoc?.longitude - toLoc?.longitude) * 2,
+  };
 
-      const region = {
-        latitude: (fromLoc?.latitude * toLoc?.latitude) / 2,
-        longitude: (fromLoc?.longitude * toLoc?.longitude) / 2,
-        latitudeDelta: Math.abs(fromLoc?.latitude - toLoc?.latitude) * 2,
-        longitudeDelta: Math.abs(fromLoc?.longitude - toLoc?.longitude) * 2,
-      };
-
-      setValue({
-        ...value,
-        streetName: streetName,
-        restaurant: item,
-        fromLocation: fromLoc,
-        toLocation: toLoc,
-        region: region,
-      });
-    }
-    console.warn(value.toLocation);
-    return () => (subscription = false);
-  }, []);
+  setValue({
+    ...value,
+    streetName: streetName,
+    restaurant: item,
+    fromLocation: fromLoc,
+    toLocation: toLoc,
+    region: region,
+  });
 
   const renderMap = () => {
-    const DestinationMarker = () => {
+    const DestinationMarker = () => {     
       return (
         <Marker coordinate={value.toLocation ? value.toLocation : ""}>
           <View
@@ -104,6 +98,7 @@ export const Restaurant = ({ route }) => {
           showsBuildings={true}
           initialRegion={value?.region}
         >
+         
           {DestinationMarker()}
           {CarIcon()}
         </MapView>
@@ -112,9 +107,12 @@ export const Restaurant = ({ route }) => {
   };
 
   return value.restaurant === null || value.region === null ? (
-    <Text>loading</Text>
+    <Text text="loading" />
   ) : (
-    <View style={{ flex: 1 }}>{renderMap()}</View>
+    <View style={{ flex: 1 }}>
+      <StatusBar style={{ backgroundColor: "transparent" }} translucent />
+      {renderMap()}
+    </View>
   );
 };
 const styles = StyleSheet.create({});
