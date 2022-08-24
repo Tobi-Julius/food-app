@@ -1,8 +1,7 @@
-import { StyleSheet, View, Image, StatusBar } from "react-native";
+import { View, Image } from "react-native";
 import React, { useState, useEffect } from "react";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { COLORS, ICONS, SIZES } from "../constants";
-import MapViewDirections from "react-native-maps-directions";
 import { Text } from "../component/common";
 
 export const Restaurant = ({ route }) => {
@@ -14,31 +13,38 @@ export const Restaurant = ({ route }) => {
     region: null,
   });
 
-  const { item, area, gpsData } = route.params;
-  const fromLoc = gpsData;
-  const toLoc = item.courier.gps;
-  const streetName = area;
+  useEffect(() => {
+    let isSubcribe = true;
 
-  const region = {
-    latitude: (fromLoc?.latitude + toLoc?.latitude) / 2,
-    longitude: (fromLoc?.longitude + toLoc?.longitude) / 2,
-    latitudeDelta: Math.abs(fromLoc?.latitude - toLoc?.latitude) * 2,
-    longitudeDelta: Math.abs(fromLoc?.longitude - toLoc?.longitude) * 2,
-  };
+    const { item, area, gpsData } = route.params;
+    const fromLoc = gpsData;
+    const toLoc = item.courier.gps;
+    const streetName = area;
 
-  setValue({
-    ...value,
-    streetName: streetName,
-    restaurant: item,
-    fromLocation: fromLoc,
-    toLocation: toLoc,
-    region: region,
-  });
+    if (isSubcribe === true) {
+      const region = {
+        latitude: (fromLoc?.latitude + toLoc?.latitude) / 2,
+        longitude: (fromLoc?.longitude + toLoc?.longitude) / 2,
+        latitudeDelta: Math.abs(fromLoc?.latitude - toLoc?.latitude) * 2,
+        longitudeDelta: Math.abs(fromLoc?.longitude - toLoc?.longitude) * 2,
+      };
+      setValue({
+        ...value,
+        streetName: streetName,
+        restaurant: item,
+        fromLocation: fromLoc,
+        toLocation: toLoc,
+        region: region,
+      });
+    }
+
+    return () => (isSubcribe = false);
+  }, []);
 
   const renderMap = () => {
-    const DestinationMarker = () => {     
+    const DestinationMarker = () => {
       return (
-        <Marker coordinate={value.toLocation ? value.toLocation : ""}>
+        <Marker coordinate={value?.toLocation}>
           <View
             style={{
               width: 40,
@@ -75,7 +81,6 @@ export const Restaurant = ({ route }) => {
           anchor={{ x: 0.5, y: 0.5 }}
           coordinate={value.fromLocation}
           flat={true}
-          in
           // rotation
         >
           <Image
@@ -94,11 +99,10 @@ export const Restaurant = ({ route }) => {
         <MapView
           style={{ height: SIZES.height, width: SIZES.width }}
           provider={PROVIDER_GOOGLE}
-          // showsUserLocation={true}
+          showsUserLocation={true}
           showsBuildings={true}
           initialRegion={value?.region}
         >
-         
           {DestinationMarker()}
           {CarIcon()}
         </MapView>
@@ -106,13 +110,11 @@ export const Restaurant = ({ route }) => {
     );
   };
 
-  return value.restaurant === null || value.region === null ? (
-    <Text text="loading" />
+  return value.fromLocation === null ||
+    value.region === null ||
+    value.toLocation === null ? (
+    <Text text="Permission to Detect Location Denied" />
   ) : (
-    <View style={{ flex: 1 }}>
-      <StatusBar style={{ backgroundColor: "transparent" }} translucent />
-      {renderMap()}
-    </View>
+    <View style={{ flex: 1 }}>{renderMap()}</View>
   );
 };
-const styles = StyleSheet.create({});

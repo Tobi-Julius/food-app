@@ -23,8 +23,8 @@ export const Home = ({ navigation }) => {
           areaEncode.coords
         );
         const coords = {
-          latitude: areaEncode?.coords.latitude,
-          longitude: areaEncode?.coords.longitude,
+          latitude: 8.1141515,
+          longitude: 4.2354181,
         };
         setGpsData(coords);
         areaDetail.map((yourLocation) => {
